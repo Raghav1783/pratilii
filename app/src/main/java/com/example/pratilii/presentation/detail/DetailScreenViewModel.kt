@@ -7,6 +7,7 @@ import com.example.pratilii.Resource
 import com.example.pratilii.domain.Mail
 import com.example.pratilii.domain.fetchDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ class DetailScreenViewModel@Inject constructor(
     }
 
     fun loadMailDetail(mailId: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _mailDetail.value = fetchDetailUseCase(mailId)
         }
     }
