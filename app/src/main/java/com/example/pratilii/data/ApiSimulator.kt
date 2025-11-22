@@ -1,6 +1,7 @@
 package com.example.pratilii.data
 
 import android.content.Context
+import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.serialization.encodeToString
@@ -87,7 +88,7 @@ class ApiSimulator @Inject constructor(
 
     suspend fun getMessagesDto(page: Int, pageSize: Int): PaginatedResponse<MailDto> {
         val currentCount = callCount.incrementAndGet()
-
+        Log.d("apisimulator"," network call")
 
         if (currentCount % 4 == 0) {
             throw java.io.IOException("Network error simulated")

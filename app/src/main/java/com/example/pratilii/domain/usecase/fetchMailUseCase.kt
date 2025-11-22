@@ -1,6 +1,8 @@
-package com.example.pratilii.domain
+package com.example.pratilii.domain.usecase
 
 import androidx.paging.PagingData
+import com.example.pratilii.domain.Mail
+import com.example.pratilii.domain.MailRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

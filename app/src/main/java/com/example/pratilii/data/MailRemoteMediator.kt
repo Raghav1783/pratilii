@@ -32,18 +32,17 @@ class MailRemoteMediator @Inject constructor(
                 }
 
                 LoadType.PREPEND -> {
-
                     return MediatorResult.Success(endOfPaginationReached = true)
                 }
 
                 LoadType.APPEND -> {
-
                     val lastItem = state.lastItemOrNull()
                     if (lastItem == null) {
                         0
                     } else {
                         val currentPage =
                             (state.pages.sumOf { it.data.size } / state.config.pageSize)
+
                         currentPage
                     }
                 }
@@ -52,9 +51,9 @@ class MailRemoteMediator @Inject constructor(
             val pageSize = state.config.pageSize
 
             val response = apiSimulator.getMessagesDto(page, pageSize)
-
             val domainMessages = response.data.map { it.toDomain() }
             val entities = domainMessages.map { it.toEntity() }
+
             val endOfPagination = entities.isEmpty() || page >= response.totalPages - 1
 
             database.withTransaction {
@@ -62,23 +61,25 @@ class MailRemoteMediator @Inject constructor(
             }
 
             MediatorResult.Success(endOfPaginationReached = endOfPagination)
-        }catch (e: Exception) {
+
+        } catch (e: Exception) {
             MediatorResult.Error(e)
         }
-
     }
 
     private suspend fun syncUnsyncedData() {
         try {
-            Log.d("MailRemoteMediator", "syncUnsyncedData() called")
+
             val unsyncedData = database.mailDao().getUnsyncedMails()
+
             if (unsyncedData.isNotEmpty()) {
                 apiSimulator.updateMails(unsyncedData.map { it.toDto() })
             }
+
             database.mailDao().clearAll()
+
         } catch (e: Exception) {
-            throw e
+            MediatorResult.Error(e)
         }
     }
-
 }

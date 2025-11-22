@@ -1,8 +1,7 @@
 package com.example.pratilii.domain
 
-import android.os.Message
 import androidx.paging.PagingData
-import com.example.pratilii.Resource
+import com.example.pratilii.util.Resource
 
 import kotlinx.coroutines.flow.Flow
 

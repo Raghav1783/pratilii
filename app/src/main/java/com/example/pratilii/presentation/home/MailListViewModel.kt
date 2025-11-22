@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.pratilii.domain.IncrementReadCountUseCase
+import com.example.pratilii.domain.usecase.IncrementReadCountUseCase
 import com.example.pratilii.domain.Mail
-import com.example.pratilii.domain.fetchMailUseCase
+import com.example.pratilii.domain.usecase.fetchMailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel

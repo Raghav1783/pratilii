@@ -8,7 +8,7 @@ import androidx.room.Query
 
 @Dao
 interface MailDao {
-    @Query("SELECT * FROM mail")
+    @Query("SELECT * FROM mail ORDER BY id ASC")
     fun pagingSource(): PagingSource<Int, MailEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -1,13 +1,11 @@
 package com.example.pratilii.data
 
-import android.os.Message
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.example.pratilii.Resource
-import com.example.pratilii.data.local.MailDao
+import com.example.pratilii.util.Resource
 import com.example.pratilii.data.local.MailDatabase
 import com.example.pratilii.data.local.toDomain
 import com.example.pratilii.domain.Mail
@@ -27,7 +25,6 @@ class MailRepoImpl @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
-                enablePlaceholders = false,
                 initialLoadSize = 20
             ),
             remoteMediator = MailRemoteMediator(

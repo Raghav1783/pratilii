@@ -1,4 +1,4 @@
-package com.example.pratilii
+package com.example.pratilii.util
 
 sealed class Resource<out T> {
     object Loading : Resource<Nothing>()

@@ -1,5 +1,6 @@
-package com.example.pratilii.domain
+package com.example.pratilii.domain.usecase
 
+import com.example.pratilii.domain.MailRepository
 import javax.inject.Inject
 
 class IncrementReadCountUseCase @Inject constructor(

@@ -97,7 +97,6 @@ fun MailListScreen(onMailClick: (Int) -> Unit) {
                     ) { index ->
                         val item = pagingItems[index]
                         item?.let { mail ->
-
                             MailListItem(mail,
                                 onClick = { viewModel.onAction(MailListUiAction.OnMailSelected(mail.id)) })
                             Divider()
