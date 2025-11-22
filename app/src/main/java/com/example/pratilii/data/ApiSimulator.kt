@@ -95,7 +95,7 @@ class ApiSimulator @Inject constructor(
         }
 
 
-        val delayTimeMs = 1000L
+        val delayTimeMs = 5000L
         delay(delayTimeMs)
 
         val startIndex = page * pageSize
