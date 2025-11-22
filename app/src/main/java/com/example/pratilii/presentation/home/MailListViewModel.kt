@@ -12,6 +12,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 
 import kotlinx.coroutines.launch
@@ -25,9 +28,8 @@ class MailListViewModel @Inject constructor(
 
 
 
-    private val _eventChannel = Channel<MailListUiEvent>()
-    val eventFlow = _eventChannel.receiveAsFlow()
-
+    private val _eventFlow = MutableSharedFlow<MailListUiEvent>()
+    val eventFlow: SharedFlow<MailListUiEvent> = _eventFlow.asSharedFlow()
     val mailsPagingFlow: Flow<PagingData<Mail>> = fetchMailUseCase()
         .cachedIn(viewModelScope)
 
@@ -51,7 +53,7 @@ class MailListViewModel @Inject constructor(
 
     private fun sendEvent(event : MailListUiEvent) {
         viewModelScope.launch {
-            _eventChannel.send(event)
+            _eventFlow.emit(event)
         }
     }
 
